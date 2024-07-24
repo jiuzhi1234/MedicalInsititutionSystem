@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MedicineMapper">
+
+    <sql id="Base_Column_List">
+        med_id,med_name,med_exp_type,med_exp_level,med_measurement,med_max_prize,med_approval_mark,med_hos_level,med_size,med_trade_name,med_start_time,med_end_time,med_valid,med_special_mark
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.Medicine">
+        select
+        <include refid="Base_Column_List" />
+        from t_medicine
+        <where>
+            <if test="id != null"> and med_id= #{id}</if>
+            <if test="name != null"> and med_name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.Medicine">
+        select
+        <include refid="Base_Column_List" />
+        from t_medicine
+        where med_id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from t_medicine
+        where  med_id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.Medicine" useGeneratedKeys="true">
+        insert into t_medicine
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="expType != null">med_exp_type,</if>
+            <if test="expLevel != null">med_exp_level,</if>
+            <if test="measurement != null">med_measurement,</if>
+            <if test="maxPrice != null">med_max_price,</if>
+            <if test="approvalMark != null">med_approval_mark,</if>
+            <if test="hosLevel != null">med_hos_level,</if>
+            <if test="size != null">med_size,</if>
+            <if test="tradeName != null">med_trade_name,</if>
+            <if test="startTime != null">med_start_time,</if>
+            <if test="endTime != null">med_end_time,</if>
+            <if test="valid != null">med_valid,</if>
+            <if test="specialMark != null">med_special_mark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="expType != null">#{expType},</if>
+            <if test="expLevel != null">#{expLevel},</if>
+            <if test="measurement != null">#{measurement},</if>
+            <if test="maxPrice != null">#{maxPrice},</if>
+            <if test="approvalMark != null">#{approvalMark},</if>
+            <if test="hosLevel != null">#{hosLevel},</if>
+            <if test="size != null">#{size},</if>
+            <if test="tradeName != null">#{tradeName},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="valid != null">#{valid},</if>
+            <if test="specialMark != null">#{specialMark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Medicine">
+        update t_medicine
+        <set>
+            <if test="name != null">
+                med_name = #{name},
+            </if>
+            <if test="expType != null">
+                med_exp_type = #{expType},
+            </if>
+            <if test="expLevel != null">
+                med_exp_level = #{expLevel},
+            </if>
+            <if test="measurement != null">
+                med_measurement = #{measurement},
+            </if>
+            <if test="maxPrice != null">
+                med_max_price = #{maxPrice},
+            </if>
+            <if test="approvalMark != null">
+                med_approval_mark = #{approvalMark},
+            </if>
+            <if test="hosLevel != null">
+                med_hos_level = #{hosLevel},
+            </if>
+            <if test="size != null">
+                med_size = #{size},
+            </if>
+            <if test="tradeName != null">
+                med_trade_name = #{tradeName},
+            </if>
+            <if test="startTime != null">
+                med_start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                med_end_time = #{endTime},
+            </if>
+            <if test="valid != null">
+                med_valid = #{valid},
+            </if>
+            <if test="specialMark != null">
+                med_special_mark = #{specialMark},
+            </if>
+        </set>
+        where med_id = #{id}
+    </update>
+
+</mapper>

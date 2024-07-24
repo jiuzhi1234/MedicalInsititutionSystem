@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PersonnelVisitsInfoMapper">
+
+    <sql id="Base_Column_List">
+        person_ID,hospitalization_number,medical_category,admission_date,discharge_date,disease_code,hospital_grade,admission_code,diagnosed_name,discharge_reason,settlement_flag
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.PersonnelVisitsInfo">
+        select
+        <include refid="Base_Column_List" />
+        from t_personnel_visits_info
+        <where>
+            <if test="id != null"> and person_ID= #{id}</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.PersonnelVisitsInfo">
+        select
+        <include refid="Base_Column_List" />
+        from t_personnel_visits_info
+        where person_ID = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from t_personnel_visits_info
+        where  person_ID = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.PersonnelVisitsInfo" useGeneratedKeys="true">
+        insert into t_personnel_visits_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="hospitalizationNumber != null">hospitalization_number,</if>
+            <if test="designatedNumber != null">designated_number,</if>
+            <if test="medicalCategory != null">medical_category,</if>
+            <if test="admissionDate != null">admission_date,</if>
+            <if test="dischargeDate != null">discharge_date,</if>
+            <if test="diseaseCode != null">disease_code,</if>
+            <if test="hospitalGrade != null">hospital_grade,</if>
+            <if test="admissionCode != null">admission_code,</if>
+            <if test="diagnosedName != null">diagnosed_name,</if>
+            <if test="dischargeReason != null">discharge_reason,</if>
+            <if test="settlementFlag != null">settlement_flag,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="hospitalizationNumber != null">#{hospitalizationNumber},</if>
+            <if test="designatedNumber != null">#{designatedNumber},</if>
+            <if test="medicalCategory != null">#{medicalCategory},</if>
+            <if test="admissionDate != null">#{admissionDate},</if>
+            <if test="dischargeDate != null">#{dischargeDate},</if>
+            <if test="diseaseCode != null">#{diseaseCode},</if>
+            <if test="hospitalGrade != null">#{hospitalGrade},</if>
+            <if test="admissionCode != null">#{admissionCode},</if>
+            <if test="diagnosedName != null">#{diagnosedName},</if>
+            <if test="dischargeReason != null">#{dischargeReason},</if>
+            <if test="settlementFlag != null">#{settlementFlag},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.PersonnelVisitsInfo">
+        update t_personnel_visits_info
+        <set>
+            <if test="hospitalizationNumber != null">
+                hospitalization_number = #{hospitalizationNumber},
+            </if>
+            <if test="medicalCategory != null">
+                medical_category = #{medicalCategory},
+            </if>
+            <if test="admissionDate != null">
+                admission_date = #{admissionDate},
+            </if>
+            <if test="dischargeDate != null">
+                discharge_date = #{dischargeDate},
+            </if>
+            <if test="diseaseCode != null">
+                disease_code = #{diseaseCode},
+            </if>
+            <if test="hospitalGrade != null">
+                hospital_grade = #{hospitalGrade},
+            </if>
+            <if test="admissionCode != null">
+                admission_code = #{admissionCode},
+            </if>
+            <if test="diagnosedName != null">
+                diagnosed_name = #{diagnosedName},
+            </if>
+            <if test="dischargeReason != null">
+                discharge_reason = #{dischargeReason},
+            </if>
+            <if test="settlementFlag != null">
+                settlement_flag = #{settlementFlag},
+            </if>
+        </set>
+        where person_ID = #{id}
+    </update>
+
+</mapper>

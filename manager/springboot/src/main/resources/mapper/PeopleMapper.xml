@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PeopleMapper">
+
+    <sql id="Base_Column_List">
+        med_id,med_name,med_exp_type,med_exp_level,med_measurement,med_max_prize,med_approval_mark,med_hos_level,med_size,med_trade_name,med_start_time,med_end_time,med_valid,med_special_mark
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.People">
+        select
+        <include refid="Base_Column_List" />
+        from people
+        <where>
+            <if test="id != null"> and med_id= #{id}</if>
+            <if test="name != null"> and med_name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.People">
+        select
+        <include refid="Base_Column_List" />
+        from people
+        where people_id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from people
+        where  people_id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.People" useGeneratedKeys="true">
+        insert into people
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="peopleId != null">people_id,</if>
+            <if test="type != null">ID_type,</if>
+            <if test="id != null">ID,</if>
+            <if test="name != null">name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="nationality != null">nationality,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="workDate != null">work_date,</if>
+            <if test="retirementDate != null">retirement_date,</if>
+            <if test="retirement != null">retirement,</if>
+            <if test="residenceType != null">residence_type,</if>
+            <if test="residenceAddress != null">residence_address,</if>
+            <if test="education != null">education,</if>
+            <if test="politicalStatus != null">political_status,</if>
+            <if test="identity != null">identity,</if>
+            <if test="employment != null">employment,</if>
+            <if test="technicalPosition != null">technical_position,</if>
+            <if test="workerLevel != null">worker_level,</if>
+            <if test="marriage != null">marriage,</if>
+            <if test="administrativePosition != null">administrative_position,</if>
+            <if test="note != null">note,</if>
+            <if test="companyId != null">company_id,</if>
+            <if test="medicalPersonnel != null">medical_personnel,</if>
+            <if test="health != null">health,</if>
+            <if test="modelWorker != null">model_worker,</if>
+            <if test="cadre != null">cadre,</if>
+            <if test="civilServant != null">education,</if>
+            <if test="authorizedStrength != null">authorized_strength,</if>
+            <if test="residentType != null">resident_type,</if>
+            <if test="flexibleEmployment != null">flexible_employment,</if>
+            <if test="migrantWorker != null">migrant_worker,</if>
+            <if test="employer != null">employer,</if>
+            <if test="militaryWorker != null">military_worker,</if>
+            <if test="socialSecurityId != null">social_security_id,</if>
+            <if test="medinsId != null">medins_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="peopleId != null">#{peopleId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="nationality != null">#{nationality},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="workDate != null">#{workDate},</if>
+            <if test="retirementDate != null">#{retirementDate},</if>
+            <if test="retirement != null">#{retirement},</if>
+            <if test="residenceType != null">#{residenceType},</if>
+            <if test="residenceAddress != null">#{residenceAddress},</if>
+            <if test="education != null">#{education},</if>
+            <if test="politicalStatus != null">#{politicalStatus},</if>
+            <if test="identity != null">#{identity},</if>
+            <if test="employment != null">#{employment},</if>
+            <if test="technicalPosition != null">#{technicalPostion},</if>
+            <if test="workerLevel != null">#{workerLevel},</if>
+            <if test="marriage != null">#{marriage},</if>
+            <if test="administrativePosition != null">#{administrativePosition},</if>
+            <if test="note != null">#{note},</if>
+            <if test="companyId != null">#{companyId},</if>
+            <if test="medicalPersonnel != null">#{medicalPersonnel},</if>
+            <if test="health != null">#{health},</if>
+            <if test="modelWorker != null">#{modelWorker},</if>
+            <if test="cadre != null">#{cadre},</if>
+            <if test="civilServant != null">#{civilServant},</if>
+            <if test="authorizedStrength != null">#{authorizedStrength},</if>
+            <if test="residentType != null">#{residentType},</if>
+            <if test="flexibleEmployment != null">#{flexibleEmployment},</if>
+            <if test="migrantWorker != null">#{migrantWorker},</if>
+            <if test="employer != null">#{employer},</if>
+            <if test="militaryPersonnel != null">#{militaryPersonnel},</if>
+            <if test="socialSecurityId != null">#{socialSecurityId},</if>
+            <if test="medinsId != null">#{medinsId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Medicine">
+        update people
+        <set>
+            <if test="peopleId != null">
+                people_id = #{peopleId},
+            </if>
+            <if test="type != null">
+                ID_type = #{type},
+            </if>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="nationality != null">
+                nationality = #{nationality},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="workDate != null">
+                work_date = #{workDate},
+            </if>
+            <if test="retirementDate != null">
+                retirement_date = #{retirementDate},
+            </if>
+            <if test="retirement != null">
+                retirement = #{retirement},
+            </if>
+            <if test="residenceType != null">
+                residence_type = #{residenceType},
+            </if>
+            <if test="residenceAddress != null">
+                residence_address = #{residenceAddress},
+            </if>
+            <if test="education != null">
+                education = #{education},
+            </if>
+            <if test="politicalStatus != null">
+                political_status = #{politicalStatus},
+            </if>
+            <if test="identity != null">
+                identity = #{identity},
+            </if>
+            <if test="employment != null">
+                employment = #{employment},
+            </if>
+            <if test="technicalPosition != null">
+                technical_position = #{technicalPosition},
+            </if>
+            <if test="workerLevel != null">
+                worker_level = #{workerLevel},
+            </if>
+            <if test="marriage != null">
+                marriage = #{marriage},
+            </if>
+            <if test="administrativePosition != null">
+                 administrative_position= #{administrativePosition},
+            </if>
+            <if test="note != null">
+                note = #{note},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId},
+            </if>
+            <if test="medicalPersonnel != null">
+                medical_personnel = #{medicalPersonnel},
+            </if>
+            <if test="health != null">
+                health = #{health},
+            </if>
+            <if test="modelWorker != null">
+                model_worker = #{modelWorker},
+            </if>
+            <if test="cadre != null">
+                cadre = #{cadre},
+            </if>
+            <if test="civilServant != null">
+                civil_servant = #{civilServant},
+            </if>
+            <if test="authorizedStrength != null">
+                authorized_strength = #{authorizedStrength},
+            </if>
+            <if test="residenceType != null">
+                residence_type = #{residenceType},
+            </if>
+            <if test="flexibleEmployment != null">
+                flexible_employment = #{flexibleEmployement},
+            </if>
+            <if test="migrantWorker != null">
+                migrant_worker = #{migrantWorker},
+            </if>
+            <if test="employer != null">
+                emplyer = #{employer},
+            </if>
+            <if test="militaryPersonnel != null">
+                military_personnel = #{militaryPersonnel},
+            </if>
+            <if test="socailSecurityId != null">
+                social_security_id = #{socialSecurityId},
+            </if>
+            <if test="medinsId != null">
+                medins_id = #{medinsId},
+            </if>
+        </set>
+        where people_id = #{peopleId}
+    </update>
+
+</mapper>
